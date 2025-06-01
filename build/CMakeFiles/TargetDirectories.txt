@@ -1,4 +1,5 @@
 C:/Users/mathe/OneDrive/Documentos/GitHub/projeto-mqtt/build/CMakeFiles/projeto-mqtt.dir
+C:/Users/mathe/OneDrive/Documentos/GitHub/projeto-mqtt/build/CMakeFiles/projeto-mqtt_ws2812_pio_h.dir
 C:/Users/mathe/OneDrive/Documentos/GitHub/projeto-mqtt/build/CMakeFiles/edit_cache.dir
 C:/Users/mathe/OneDrive/Documentos/GitHub/projeto-mqtt/build/CMakeFiles/rebuild_cache.dir
 C:/Users/mathe/OneDrive/Documentos/GitHub/projeto-mqtt/build/pico-sdk/CMakeFiles/edit_cache.dir
