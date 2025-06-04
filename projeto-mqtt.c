@@ -316,19 +316,6 @@ static const char *full_topic(MQTT_CLIENT_DATA_T *state, const char *name)
 #endif
 }
 
-// Controle do LED
-static void control_led(MQTT_CLIENT_DATA_T *state, bool on)
-{
-    // Publish state on /state topic and on/off led board
-    const char *message = on ? "On" : "Off";
-    if (on)
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-    else
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-
-    mqtt_publish(state->mqtt_client_inst, full_topic(state, "/led/state"), message, strlen(message), MQTT_PUBLISH_QOS, MQTT_PUBLISH_RETAIN, pub_request_cb, state);
-}
-
 static void control_lights(MQTT_CLIENT_DATA_T *state, bool on, bool *comodo)
 {
     // Publish state on /state topic and on/off led board
@@ -386,7 +373,7 @@ static void control_lights(MQTT_CLIENT_DATA_T *state, bool on, bool *comodo)
 static void publish_condition(MQTT_CLIENT_DATA_T *state)
 {
     static float old_temperatura;
-    const char *temperature_key = full_topic(state, "/temperature");
+    const char *temperature_key = full_topic(state, "/aquario/temperature");
     if (temperatura != old_temperatura)
     {
         old_temperatura = temperatura;
@@ -397,7 +384,7 @@ static void publish_condition(MQTT_CLIENT_DATA_T *state)
     }
 
     static float old_ph;
-    const char *ph_key = full_topic(state, "/ph");
+    const char *ph_key = full_topic(state, "/aquario/ph");
     if (ph != old_ph)
     {
         old_ph = ph;
@@ -516,7 +503,7 @@ static void mqtt_incoming_publish_cb(void *arg, const char *topic, u32_t tot_len
     strncpy(state->topic, topic, sizeof(state->topic));
 }
 
-// Publicar temperatura
+// Publicar condições
 static void condition_worker_fn(async_context_t *context, async_at_time_worker_t *worker)
 {
     MQTT_CLIENT_DATA_T *state = (MQTT_CLIENT_DATA_T *)worker->user_data;
